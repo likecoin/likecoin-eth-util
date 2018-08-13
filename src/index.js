@@ -1,27 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 import Web3 from 'web3';
 
+import ProviderEngine from 'web3-provider-engine/dist/es5';
+import FetchSubprovider from 'web3-provider-engine/dist/es5/subproviders/fetch';
+import TransportU2F from '@ledgerhq/hw-transport-u2f';
+import createLedgerSubprovider from '@ledgerhq/web3-subprovider';
+
 const abiDecoder = require('@likecoin/abi-decoder/dist/es5');
 
 const DEFAULT_CONFIRMATION_NEEDED = 6;
 
-async function createLedgerWeb3({ networkId, accountsLength, rpcUrl }) {
-  /* for ledger */
-  let [
-    ProviderEngine,
-    FetchSubprovider,
-    TransportU2F,
-    createLedgerSubprovider,
-  ] = await Promise.all([
-    import(/* webpackChunkName: "ledger" */ 'web3-provider-engine/dist/es5'),
-    import(/* webpackChunkName: "ledger" */ 'web3-provider-engine/dist/es5/subproviders/fetch'),
-    import(/* webpackChunkName: "ledger" */ '@ledgerhq/hw-transport-u2f'),
-    import(/* webpackChunkName: "ledger" */ '@ledgerhq/web3-subprovider'),
-  ]);
-  if (ProviderEngine.default) ProviderEngine = ProviderEngine.default;
-  if (FetchSubprovider.default) FetchSubprovider = FetchSubprovider.default;
-  if (TransportU2F.default) TransportU2F = TransportU2F.default;
-  if (createLedgerSubprovider.default) createLedgerSubprovider = createLedgerSubprovider.default;
+function createLedgerWeb3({ networkId, accountsLength, rpcUrl }) {
   const engine = new ProviderEngine();
   const getTransport = () => TransportU2F.create();
   const ledger = createLedgerSubprovider(getTransport, {
@@ -84,7 +73,7 @@ class EthHelper {
     try {
       if (initType || typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
         if (initType === 'ledger' && this.web3Type !== 'ledger') {
-          this.web3 = await createLedgerWeb3({
+          this.web3 = createLedgerWeb3({
             ...this.ledgerConfig,
             rpcUrl: this.infuraHost,
           });
