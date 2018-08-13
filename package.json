@@ -4,7 +4,8 @@
   "description": "Misc utility functions for web3",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "npx babel src --out-dir dist"
+    "build": "npx babel src --out-dir dist",
+    "lint": "eslint ."
   },
   "license": "MIT",
   "private": false,
@@ -20,6 +21,9 @@
     "babel-core": "^6.26.3",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-0": "^6.24.1"
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
   }
 }
