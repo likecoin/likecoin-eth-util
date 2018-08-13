@@ -71,7 +71,7 @@ class EthHelper {
     this.isInited = false;
     this.clearTimers();
     try {
-      if (initType || typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
+      if (initType || (typeof window !== 'undefined' && typeof window.web3 !== 'undefined')) {
         if (initType === 'ledger' && this.web3Type !== 'ledger') {
           this.web3 = createLedgerWeb3({
             ...this.ledgerConfig,
