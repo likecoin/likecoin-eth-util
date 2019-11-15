@@ -12,7 +12,7 @@
   "dependencies": {
     "@ledgerhq/hw-app-eth": "^4.7.3",
     "@ledgerhq/hw-transport-u2f": "^4.7.3",
-    "@ledgerhq/web3-subprovider": "^4.11.0",
+    "@ledgerhq/web3-subprovider": "^4.74.1",
     "@likecoin/abi-decoder": "^2.0.0",
     "web3": "^1.0.0-beta.34",
     "web3-provider-engine": "^14.0.6"
